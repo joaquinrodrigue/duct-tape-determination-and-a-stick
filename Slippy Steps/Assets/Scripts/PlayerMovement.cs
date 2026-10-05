@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Components")]
     [SerializeField] private Rigidbody rb;
+    [SerializeField] private ArduinoReceiver arduinoController;
 
     public Vector2 MoveInput { get; private set; }
     public bool JumpHeld { get; private set; }

@@ -4,7 +4,9 @@ using System.IO.Ports;
 
 public class ArduinoReceiver : MonoBehaviour
 {
-    private SerialPort port = new SerialPort("COM3", 9600);
+    [SerializeField] private bool debugEnabled = false;
+
+    private SerialPort port = new SerialPort("COM3", 19200);
 
     // Start is called before the first frame update
     void Start()
@@ -24,15 +26,21 @@ public class ArduinoReceiver : MonoBehaviour
         {
             try
             {
-                string[] ArduinoInputs = port.ReadLine().Split(';');
+                string Arudine = port.ReadLine();
+                //Debug.Log(Arudine);
+                string[] ArduinoInputs = Arudine.Split(';');
                 string X_Input = ArduinoInputs[0];
                 string Y_Input = ArduinoInputs[1];
                 string B_Input = ArduinoInputs[2];
-                Debug.Log("X Input: " + X_Input + " ... Y Input: " + Y_Input + "... B Input: " + B_Input);
+                if (debugEnabled) Debug.Log("X Input: " + X_Input + " ... Y Input: " + Y_Input + "... B Input: " + B_Input);
             }
             catch (System.IO.IOException e)
             {
                 Debug.LogWarning($"IOException (check COM3 port): {e}");
+            }
+            catch (TimeoutException)
+            {
+                if (debugEnabled) Debug.Log("No new data");
             }
             catch (Exception e)
             {
