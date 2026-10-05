@@ -1,10 +1,11 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
-    [SerializeField] private float acceleration = 1.5f;
+    [SerializeField] private float acceleration = 50f;
     [SerializeField] private float maxSpeed = 10.0f;
     [SerializeField] private float jumpSpeed = 8.0f;
 
@@ -27,11 +28,24 @@ public class PlayerMovement : MonoBehaviour
         moveAction.action.performed += OnMoveEnter;
         moveAction.action.canceled += OnMoveExit;
         jumpAction.action.performed += OnJumpEnter;
-        jumpAction.action.performed += OnJumpExit;
+        jumpAction.action.canceled += OnJumpExit;
+    }
+
+    void OnEnable()
+    {
+        moveAction.action.Enable();
+        jumpAction.action.Enable();
+    }
+    
+    void OnDisable()
+    {
+        moveAction.action.Disable();
+        jumpAction.action.Disable();
     }
 
     private void OnMoveEnter(InputAction.CallbackContext ctx)
     {
+        if(GetIsJumping()) enabled = false;
         MoveInput = ctx.ReadValue<Vector2>();
     }
 
@@ -54,20 +68,28 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 targetVelocity = maxSpeed * (new Vector3(MoveInput.x, 0, MoveInput.y)).normalized;
-        rb.AddRelativeForce(acceleration * (new Vector3(MoveInput.x, 0, MoveInput.y)).normalized, ForceMode.Force);
-        Vector3 horizontalVelocity = new(rb.linearVelocity.x, 0, rb.linearVelocity.z);
-        if (targetVelocity.magnitude < horizontalVelocity.magnitude)
+        Vector3 moveDirection = new Vector3(MoveInput.x, 0, MoveInput.y).normalized; 
+        Vector3 horizontalVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+
+        if(horizontalVelocity.magnitude < maxSpeed || Vector3.Dot(moveDirection, horizontalVelocity) < 0)
         {
-            Vector3 temp = rb.linearVelocity;
-            horizontalVelocity = horizontalVelocity.normalized * targetVelocity.magnitude;
-            rb.linearVelocity = new Vector3(horizontalVelocity.x, rb.linearVelocity.y, horizontalVelocity.z);
+            rb.AddRelativeForce(acceleration * moveDirection, ForceMode.Acceleration);
         }
 
         if (JumpPressed)
         {
-            rb.AddRelativeForce(new Vector3(0, jumpSpeed, 0), ForceMode.Impulse);
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+            rb.AddRelativeForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
         }
-        JumpPressed = false;
+
+        if (JumpPressed && Physics.Raycast(transform.position, Vector3.down, 0.1f))
+        {
+            JumpPressed = false;
+        }
+    }
+
+    internal bool GetIsJumping()
+    {
+        return JumpPressed;
     }
 }
