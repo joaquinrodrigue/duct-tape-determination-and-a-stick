@@ -648,7 +648,6 @@ GameObject:
   - component: {fileID: 1264092624}
   - component: {fileID: 1264092628}
   - component: {fileID: 1264092629}
-  - component: {fileID: 1264092630}
   m_Layer: 3
   m_Name: Player1
   m_TagString: Untagged
@@ -797,18 +796,6 @@ MonoBehaviour:
   moveAction: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   jumpAction: {fileID: -2099379676528639254, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   rb: {fileID: 1264092628}
---- !u!114 &1264092630
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1264092623}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0939cdb80e1aebc4198711794ddc83eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ArduinoReceiver
 --- !u!1 &1438476247
 GameObject:
   m_ObjectHideFlags: 0
@@ -1037,7 +1024,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d568f1cb5d598684ba41c91434e4968a, type: 2}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

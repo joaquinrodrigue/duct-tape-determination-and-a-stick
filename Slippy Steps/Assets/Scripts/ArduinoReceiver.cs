@@ -2,25 +2,29 @@ using UnityEngine;
 using System;
 using System.IO.Ports;
 
-public class ArduinoReceiver : MonoBehaviour
+/// <summary>
+/// Helper class to poll the arduino controller
+/// </summary>
+public class ArduinoReceiver 
 {
-    [SerializeField] private bool debugEnabled = false;
+    private bool debugEnabled = false;
+    private int center = 512;
+    private short mult = 64;
+    private SerialPort port = new("COM3", 19200);
 
-    private SerialPort port = new SerialPort("COM3", 19200);
-
+    public short XMovement { get; private set; }
+    public short YMovement { get; private set; }
+    public bool JumpHeld { get; private set; }
+    //
     // Start is called before the first frame update
-    void Start()
+    public ArduinoReceiver()
     {
         port.Open();
-        /*
-        Set the read timeout low so unity doesn't freeze,
-        and catch the exception below in update that unity will throw
-        when the port isn't open and unity tries to check it
-        */
         port.ReadTimeout = 10;
     }
-    // Update is called once per frame
-    void FixedUpdate()
+
+    // polls the serial port
+    public void PollInput()
     {
         if (port.IsOpen)
         {
@@ -33,7 +37,12 @@ public class ArduinoReceiver : MonoBehaviour
                 string Y_Input = ArduinoInputs[1];
                 string B_Input = ArduinoInputs[2];
                 if (debugEnabled) Debug.Log("X Input: " + X_Input + " ... Y Input: " + Y_Input + "... B Input: " + B_Input);
+
+                XMovement = (short) ((short.Parse(X_Input) - center) * mult);
+                YMovement = (short) ((short.Parse(Y_Input) - center) * mult);
+                JumpHeld = short.Parse(B_Input) > 1;
             }
+            // the immense catch block count
             catch (System.IO.IOException e)
             {
                 Debug.LogWarning($"IOException (check COM3 port): {e}");
@@ -41,6 +50,7 @@ public class ArduinoReceiver : MonoBehaviour
             catch (TimeoutException)
             {
                 if (debugEnabled) Debug.Log("No new data");
+                // this case can do nothing cause the input values shouldnt change regardless
             }
             catch (Exception e)
             {
