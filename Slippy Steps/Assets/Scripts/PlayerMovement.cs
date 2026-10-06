@@ -1,13 +1,18 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    private static readonly WaitForSeconds _waitForSeconds1 = new(1f);
+    
     [Header("Movement")]
     [SerializeField] private float acceleration = 50f;
     [SerializeField] private float maxSpeed = 10.0f;
     [SerializeField] private float jumpSpeed = 8.0f;
+    [SerializeField] private bool isRagdolled = false;
+    [SerializeField] private bool isWakingUp = false;
 
     [Header("Input Actions")]
     [SerializeField] private InputActionAsset inputActions;
@@ -16,6 +21,9 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Components")]
     [SerializeField] private Rigidbody rb;
+
+    [Header("Layer Masks")]
+    [SerializeField] private LayerMask groundLayer; 
 
     public Vector2 MoveInput { get; private set; }
     public bool JumpHeld { get; private set; }
@@ -44,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnMoveEnter(InputAction.CallbackContext ctx)
     {
-        if(GetIsJumping()) enabled = false;
+        if(isRagdolled) return;
         MoveInput = ctx.ReadValue<Vector2>();
     }
 
@@ -67,6 +75,14 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if(isRagdolled && GroundCheck() && !isWakingUp)
+        {
+            StartCoroutine(RagdollWakeup());
+        }
+
+        if(isRagdolled) return;
+
         Vector3 moveDirection = new Vector3(MoveInput.x, 0, MoveInput.y).normalized; 
         Vector3 horizontalVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
 
@@ -79,16 +95,29 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
             rb.AddRelativeForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
-        }
-
-        if (JumpPressed && Physics.Raycast(transform.position, Vector3.down, 0.1f))
-        {
-            JumpPressed = false;
+            isRagdolled = true;
         }
     }
 
-    internal bool GetIsJumping()
+    public bool GetJumpPressed()
     {
+        if(isRagdolled) return false;
         return JumpPressed;
+    }
+
+    public bool GroundCheck()
+    {
+        Debug.DrawRay(transform.position + Vector3.down, Vector3.down * 0.01f, Color.red, .016f);
+        return Physics.SphereCast(transform.position + Vector3.down * 1.5f, 0.1f, Vector3.down, out _, 0.05f, groundLayer);
+    }
+
+    private IEnumerator RagdollWakeup()
+    {
+        Debug.Log("Ragdoll waking up");
+        isWakingUp = true;
+        yield return _waitForSeconds1;
+        isRagdolled = false;
+        isWakingUp = false;
+        JumpPressed = false;
     }
 }
