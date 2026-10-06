@@ -16,49 +16,67 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Input Actions")]
     [SerializeField] private InputActionAsset inputActions;
-    [SerializeField] private InputActionReference moveAction;
+    [SerializeField] private InputActionReference xAxisAction;
+    [SerializeField] private InputActionReference yAxisAction;
     [SerializeField] private InputActionReference jumpAction;
 
     [Header("Components")]
     [SerializeField] private Rigidbody rb;
+    [SerializeField] private ArduinoReceiver arduinoController;
 
     [Header("Layer Masks")]
-    [SerializeField] private LayerMask groundLayer; 
+    [SerializeField] private LayerMask groundLayer;
 
-    public Vector2 MoveInput { get; private set; }
+    private Vector2 moveInput;
+    public Vector2 MoveInput { get => moveInput; }
     public bool JumpHeld { get; private set; }
     public bool JumpPressed { get; private set; }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-        moveAction.action.performed += OnMoveEnter;
-        moveAction.action.canceled += OnMoveExit;
+        xAxisAction.action.performed += OnXMoveEnter;
+        xAxisAction.action.canceled += OnXMoveExit;
+        yAxisAction.action.performed += OnYMoveEnter;
+        yAxisAction.action.canceled += OnYMoveExit;
         jumpAction.action.performed += OnJumpEnter;
         jumpAction.action.canceled += OnJumpExit;
     }
 
     void OnEnable()
     {
-        moveAction.action.Enable();
+        xAxisAction.action.Enable();
+        yAxisAction.action.Enable();
         jumpAction.action.Enable();
     }
     
     void OnDisable()
     {
-        moveAction.action.Disable();
+        xAxisAction.action.Disable();
+        yAxisAction.action.Disable();
         jumpAction.action.Disable();
     }
 
-    private void OnMoveEnter(InputAction.CallbackContext ctx)
+    private void OnXMoveEnter(InputAction.CallbackContext ctx)
     {
-        if(isRagdolled) return;
-        MoveInput = ctx.ReadValue<Vector2>();
+        if (isRagdolled) return;
+        moveInput.x = ctx.ReadValue<float>();
     }
 
-    private void OnMoveExit(InputAction.CallbackContext ctx)
+    private void OnXMoveExit(InputAction.CallbackContext ctx)
     {
-        MoveInput = Vector2.zero;
+        moveInput.x = 0f;
+    }
+
+    private void OnYMoveEnter(InputAction.CallbackContext ctx)
+    {
+        if (isRagdolled) return;
+        moveInput.y = ctx.ReadValue<float>();
+    }
+
+    private void OnYMoveExit(InputAction.CallbackContext ctx)
+    {
+        moveInput.y = 0f;
     }
 
     private void OnJumpEnter(InputAction.CallbackContext ctx)
