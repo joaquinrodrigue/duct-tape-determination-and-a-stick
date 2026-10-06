@@ -381,7 +381,7 @@ Rigidbody:
   m_GameObject: {fileID: 481235242}
   serializedVersion: 5
   m_Mass: 1
-  m_LinearDamping: 1
+  m_LinearDamping: 0.5
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -412,12 +412,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   acceleration: 0
-  maxSpeed: 10
+  maxSpeed: 20
   jumpSpeed: 10
+  isRagdolled: 0
+  isWakingUp: 0
   inputActions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   moveAction: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   jumpAction: {fileID: -2099379676528639254, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   rb: {fileID: 481235247}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &719252164
 GameObject:
   m_ObjectHideFlags: 0
@@ -463,10 +468,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   baseStiffness: 0
-  maxStiffness: 500
+  maxStiffness: 2000
   maxStretch: 10
-  springDamping: 5
-  springRestLength: 5
+  springDamping: 1
+  springRestLength: 10
   playerRbs:
   - {fileID: 1264092628}
   - {fileID: 1211262748}
@@ -597,7 +602,7 @@ Rigidbody:
   m_GameObject: {fileID: 1211262743}
   serializedVersion: 5
   m_Mass: 1
-  m_LinearDamping: 1
+  m_LinearDamping: 0.5
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -628,12 +633,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   acceleration: 0
-  maxSpeed: 10
+  maxSpeed: 20
   jumpSpeed: 10
+  isRagdolled: 0
+  isWakingUp: 0
   inputActions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   moveAction: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   jumpAction: {fileID: -2099379676528639254, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   rb: {fileID: 1211262748}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &1264092623
 GameObject:
   m_ObjectHideFlags: 0
@@ -759,7 +769,7 @@ Rigidbody:
   m_GameObject: {fileID: 1264092623}
   serializedVersion: 5
   m_Mass: 1
-  m_LinearDamping: 1
+  m_LinearDamping: 0.5
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -792,10 +802,15 @@ MonoBehaviour:
   acceleration: 50
   maxSpeed: 20
   jumpSpeed: 10
+  isRagdolled: 0
+  isWakingUp: 0
   inputActions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   moveAction: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   jumpAction: {fileID: -2099379676528639254, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   rb: {fileID: 1264092628}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &1438476247
 GameObject:
   m_ObjectHideFlags: 0
@@ -921,7 +936,7 @@ Rigidbody:
   m_GameObject: {fileID: 1438476247}
   serializedVersion: 5
   m_Mass: 1
-  m_LinearDamping: 1
+  m_LinearDamping: 0.5
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -952,12 +967,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   acceleration: 0
-  maxSpeed: 10
+  maxSpeed: 20
   jumpSpeed: 10
+  isRagdolled: 0
+  isWakingUp: 0
   inputActions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   moveAction: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   jumpAction: {fileID: -2099379676528639254, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   rb: {fileID: 1438476252}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &1870765325
 GameObject:
   m_ObjectHideFlags: 0
@@ -970,8 +990,8 @@ GameObject:
   - component: {fileID: 1870765328}
   - component: {fileID: 1870765327}
   - component: {fileID: 1870765326}
-  m_Layer: 0
-  m_Name: Plane
+  m_Layer: 6
+  m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

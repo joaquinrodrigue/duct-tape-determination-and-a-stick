@@ -44,17 +44,6 @@ public class RubberbandController : MonoBehaviour
             float distance = toCenter.magnitude;
             float displacement = distance - springRestLength;
             
-            if(playerMovement.GetIsJumping()) 
-            {
-                rb.transform.rotation = Quaternion.Euler(90, rb.transform.rotation.eulerAngles.y, rb.transform.rotation.eulerAngles.z);
-                playerMovement.enabled = false;
-            }
-            else if(!playerMovement.enabled)
-            {
-                rb.transform.rotation = Quaternion.Euler(0, rb.transform.rotation.eulerAngles.y, rb.transform.rotation.eulerAngles.z);
-                StartCoroutine(RagdollWakeup(playerMovement));
-            }
-
             if(displacement > 0)
             {
                 float stretchRatio = Mathf.Clamp01(displacement / maxStretch);
@@ -68,10 +57,5 @@ public class RubberbandController : MonoBehaviour
                 rb.AddForce(springForce - dampingForce, ForceMode.Acceleration);
             }
         }
-    }
-    private IEnumerator RagdollWakeup(PlayerMovement playerMovement)
-    {
-        yield return new WaitForSeconds(1f);
-        playerMovement.enabled = true;
     }
 }
