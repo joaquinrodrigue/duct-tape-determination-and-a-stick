@@ -417,7 +417,8 @@ MonoBehaviour:
   isRagdolled: 0
   isWakingUp: 0
   inputActions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  moveAction: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  xAxisAction: {fileID: -385235971158047383, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  yAxisAction: {fileID: -2976979062909377180, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   jumpAction: {fileID: -2099379676528639254, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   rb: {fileID: 481235247}
   groundLayer:
@@ -638,7 +639,8 @@ MonoBehaviour:
   isRagdolled: 0
   isWakingUp: 0
   inputActions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  moveAction: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  xAxisAction: {fileID: -385235971158047383, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  yAxisAction: {fileID: -2976979062909377180, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   jumpAction: {fileID: -2099379676528639254, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   rb: {fileID: 1211262748}
   groundLayer:
@@ -805,7 +807,8 @@ MonoBehaviour:
   isRagdolled: 0
   isWakingUp: 0
   inputActions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  moveAction: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  xAxisAction: {fileID: -385235971158047383, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  yAxisAction: {fileID: -2976979062909377180, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   jumpAction: {fileID: -2099379676528639254, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   rb: {fileID: 1264092628}
   groundLayer:
@@ -972,7 +975,8 @@ MonoBehaviour:
   isRagdolled: 0
   isWakingUp: 0
   inputActions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  moveAction: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  xAxisAction: {fileID: -385235971158047383, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  yAxisAction: {fileID: -2976979062909377180, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   jumpAction: {fileID: -2099379676528639254, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   rb: {fileID: 1438476252}
   groundLayer:
