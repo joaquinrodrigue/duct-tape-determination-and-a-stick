@@ -5,14 +5,17 @@ TagManager:
   serializedVersion: 3
   tags:
   - Floor
+  tags: []
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
+
   - Floor
+  - Player
   - Water
   - UI
-  - 
+  - Ground
   - 
   - 
   - 
