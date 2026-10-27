@@ -4,7 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(FloorCheck))]
 public class PenguinAI : MonoBehaviour
 {
-    private enum State { Wander, Charging, Sliding, Braking, Cooldown }
+    public enum State { Wander, Charging, Sliding, Braking, Cooldown, Crash}
 
     [Header("Target")]
     [SerializeField] private Transform target;
@@ -27,10 +27,13 @@ public class PenguinAI : MonoBehaviour
     [SerializeField] private float cooldownTime = 3f;
     [SerializeField] private float cooldownTurnSpeed = 180f;  // finishes the 180 if braking didn't
 
+    [Header("Crash")]
+    [SerializeField] public float crashTime = 2f;
+
     private Rigidbody body;
     private FloorCheck floorCheck;
 
-    private State state;
+    public State state;
     private float stateTimer;
 
     private Vector3 wanderDir;
@@ -67,7 +70,7 @@ public class PenguinAI : MonoBehaviour
 
     // ---------- State machine core ----------
 
-    private void SetState(State newState, float timer = 0f)
+    public void SetState(State newState, float timer = 0f)
     {
         state = newState;
         stateTimer = timer;
@@ -84,6 +87,7 @@ public class PenguinAI : MonoBehaviour
             case State.Sliding:  UpdateSliding();  break;
             case State.Braking:  UpdateBraking();  break;
             case State.Cooldown: UpdateCooldown(); break;
+            case State.Crash:    UpdateCrash();    break;
         }
     }
 
@@ -253,6 +257,15 @@ public class PenguinAI : MonoBehaviour
         body.MoveRotation(Quaternion.RotateTowards(
             body.rotation, turnAroundRotation, cooldownTurnSpeed * Time.fixedDeltaTime));
 
+        stateTimer -= Time.fixedDeltaTime;
+        if (stateTimer <= 0f) SetState(State.Wander);
+    }
+
+    // ---------- Crash -----------
+
+    private void UpdateCrash()
+    {
+        StopMoving();
         stateTimer -= Time.fixedDeltaTime;
         if (stateTimer <= 0f) SetState(State.Wander);
     }

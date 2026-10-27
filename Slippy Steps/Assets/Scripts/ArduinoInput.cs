@@ -54,7 +54,9 @@ public class ArduinoControlDevice : InputDevice, IInputUpdateCallbackReceiver
     /// </summary>
     static ArduinoControlDevice()
     {
+#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
         InitializeInPlayer();
+#endif
     }
 
     /// <summary>
@@ -63,6 +65,7 @@ public class ArduinoControlDevice : InputDevice, IInputUpdateCallbackReceiver
     [RuntimeInitializeOnLoadMethod]
     private static void InitializeInPlayer()
     {
+#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
         if (api == null) api = new ArduinoReceiver();
 
         InputSystem.RegisterLayout<ArduinoControlDevice>(
@@ -71,10 +74,11 @@ public class ArduinoControlDevice : InputDevice, IInputUpdateCallbackReceiver
                 .WithProduct(ProductName)
         );
 
-        bool exists = InputSystem.devices.Any(d => 
-            d.description.interfaceName.Equals(InterfaceName) 
+        bool exists = InputSystem.devices.Any(d =>
+            d.description.interfaceName.Equals(InterfaceName)
             && d.description.product.Equals(ProductName));
         if (!exists) InputSystem.AddDevice(new InputDeviceDescription { interfaceName = InterfaceName, product = ProductName });
+#endif
     }
 
     /// <summary>
