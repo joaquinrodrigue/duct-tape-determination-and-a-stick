@@ -469,8 +469,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   baseStiffness: 0
-  maxStiffness: 2000
-  maxStretch: 10
+  maxStiffness: 3000
+  maxStretch: 5
   springDamping: 1
   springRestLength: 10
   playerRbs:
@@ -802,7 +802,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   acceleration: 50
-  maxSpeed: 20
+  maxSpeed: 30
   jumpSpeed: 10
   isRagdolled: 0
   isWakingUp: 0
