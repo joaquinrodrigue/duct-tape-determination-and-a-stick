@@ -40,4 +40,27 @@ public class FloorCheck : MonoBehaviour
 
         return transform.position + forward * forwardOffset + Vector3.up * (floorLevel - transform.position.y + floorClearance);
     }
+
+    public void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("Floor"))
+        {
+            CrashCheck crashCheck = GetComponentInParent<CrashCheck>();
+            if (crashCheck != null)
+            {
+                crashCheck.isGrounded = true;
+            }
+        }
+    }
+    public void OnCollisionExit(Collision other)
+    {
+        if (other.gameObject.CompareTag("Floor"))
+        {
+            CrashCheck crashCheck = GetComponentInParent<CrashCheck>();
+            if (crashCheck != null)
+            {
+                crashCheck.isGrounded = false;
+            }
+        }
+    }
 }
