@@ -11,8 +11,8 @@ public class RubberbandController : MonoBehaviour
     [SerializeField] private float springDamping = 4f;
     [SerializeField] private float springRestLength = 1.5f;
 
-    [SerializeField] private List<Rigidbody> playerRbs = new();
-    private List<PlayerMovement> playerMovementScripts = new();
+    private List<Rigidbody> playerRbs = new();
+    public List<PlayerMovement> playerMovementScripts = new();
 
     private void FixedUpdate()
     {
@@ -57,5 +57,21 @@ public class RubberbandController : MonoBehaviour
                 rb.AddForce(springForce - dampingForce, ForceMode.Acceleration);
             }
         }
+    }
+
+    public void AddPlayer(Rigidbody playerRb)
+    {
+        if(!playerRbs.Contains(playerRb))
+            playerRbs.Add(playerRb);
+        if(!playerMovementScripts.Contains(playerRb.GetComponent<PlayerMovement>()))
+            playerMovementScripts.Add(playerRb.GetComponent<PlayerMovement>());
+    }
+
+    public void RemovePlayer(Rigidbody playerRb)
+    {
+        if(playerRbs.Contains(playerRb))
+            playerRbs.Remove(playerRb);
+        if(playerMovementScripts.Contains(playerRb.GetComponent<PlayerMovement>()))
+            playerMovementScripts.Remove(playerRb.GetComponent<PlayerMovement>());
     }
 }
