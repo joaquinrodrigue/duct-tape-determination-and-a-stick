@@ -11,8 +11,8 @@ public class RubberbandController : MonoBehaviour
     [SerializeField] private float springDamping = 4f;
     [SerializeField] private float springRestLength = 1.5f;
 
-    [SerializeField] private List<Rigidbody> playerRbs = new();
-    private List<PlayerMovement> playerMovementScripts = new();
+    private List<Rigidbody> playerRbs = new();
+    public List<PlayerMovement> playerMovementScripts = new();
 
     private void FixedUpdate()
     {
@@ -44,17 +44,6 @@ public class RubberbandController : MonoBehaviour
             float distance = toCenter.magnitude;
             float displacement = distance - springRestLength;
             
-            if(playerMovement.GetIsJumping()) 
-            {
-                rb.transform.rotation = Quaternion.Euler(90, rb.transform.rotation.eulerAngles.y, rb.transform.rotation.eulerAngles.z);
-                playerMovement.enabled = false;
-            }
-            else if(!playerMovement.enabled)
-            {
-                rb.transform.rotation = Quaternion.Euler(0, rb.transform.rotation.eulerAngles.y, rb.transform.rotation.eulerAngles.z);
-                StartCoroutine(RagdollWakeup(playerMovement));
-            }
-
             if(displacement > 0)
             {
                 float stretchRatio = Mathf.Clamp01(displacement / maxStretch);
@@ -69,9 +58,20 @@ public class RubberbandController : MonoBehaviour
             }
         }
     }
-    private IEnumerator RagdollWakeup(PlayerMovement playerMovement)
+
+    public void AddPlayer(Rigidbody playerRb)
     {
-        yield return new WaitForSeconds(1f);
-        playerMovement.enabled = true;
+        if(!playerRbs.Contains(playerRb))
+            playerRbs.Add(playerRb);
+        if(!playerMovementScripts.Contains(playerRb.GetComponent<PlayerMovement>()))
+            playerMovementScripts.Add(playerRb.GetComponent<PlayerMovement>());
+    }
+
+    public void RemovePlayer(Rigidbody playerRb)
+    {
+        if(playerRbs.Contains(playerRb))
+            playerRbs.Remove(playerRb);
+        if(playerMovementScripts.Contains(playerRb.GetComponent<PlayerMovement>()))
+            playerMovementScripts.Remove(playerRb.GetComponent<PlayerMovement>());
     }
 }
