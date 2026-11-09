@@ -283,7 +283,7 @@ public class PenguinAI : MonoBehaviour
         body.linearVelocity = new Vector3(flat.x, body.linearVelocity.y, flat.z);
     }
 
-    private void StopMoving() => SetFlatVelocity(Vector3.zero);
+    public void StopMoving() => SetFlatVelocity(Vector3.zero);
 
     private Vector3 FlatForward()
     {
