@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private static readonly WaitForSeconds _waitForSeconds1 = new(1f);
     
     [Header("Movement")]
     [SerializeField] private float acceleration = 50f;
@@ -16,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Input Actions")]
     [SerializeField] private InputActionAsset inputActions;
+    [SerializeField] private PlayerInput playerInput;
     [SerializeField] private InputActionReference xAxisAction;
     [SerializeField] private InputActionReference yAxisAction;
     [SerializeField] private InputActionReference jumpAction;
@@ -28,33 +28,50 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
 
     private Vector2 moveInput;
+    private InputDevice inputDevice;
+    private InputAction xActionRuntime;
+    private InputAction yActionRuntime;
+    private InputAction jumpActionRuntime;
+
+    public InputDevice InputDevice { get => inputDevice; set => inputDevice = value; }
     public Vector2 MoveInput { get => moveInput; }
     public bool JumpHeld { get; private set; }
     public bool JumpPressed { get; private set; }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Awake()
+    void Start()
     {
-        xAxisAction.action.performed += OnXMoveEnter;
-        xAxisAction.action.canceled += OnXMoveExit;
-        yAxisAction.action.performed += OnYMoveEnter;
-        yAxisAction.action.canceled += OnYMoveExit;
-        jumpAction.action.performed += OnJumpEnter;
-        jumpAction.action.canceled += OnJumpExit;
+        xActionRuntime = playerInput.actions.FindAction(xAxisAction.action.name);
+        yActionRuntime = playerInput.actions.FindAction(yAxisAction.action.name);
+        jumpActionRuntime = playerInput.actions.FindAction(jumpAction.action.name);
+
+        xActionRuntime.performed += OnXMoveEnter;
+        xActionRuntime.canceled += OnXMoveExit;
+        yActionRuntime.performed += OnYMoveEnter;
+        yActionRuntime.canceled += OnYMoveExit;
+        jumpActionRuntime.performed += OnJumpEnter;
+        jumpActionRuntime.canceled += OnJumpExit;
+
+        xActionRuntime.Enable();
+        yActionRuntime.Enable();
+        jumpActionRuntime.Enable();
     }
 
     void OnEnable()
     {
-        xAxisAction.action.Enable();
-        yAxisAction.action.Enable();
-        jumpAction.action.Enable();
+        if (xActionRuntime != null)
+        {
+            xActionRuntime.Enable();
+            yActionRuntime.Enable();
+            jumpActionRuntime.Enable();
+        }
     }
     
     void OnDisable()
     {
-        xAxisAction.action.Disable();
-        yAxisAction.action.Disable();
-        jumpAction.action.Disable();
+        xActionRuntime.Disable();
+        yActionRuntime.Disable();
+        jumpActionRuntime.Disable();
     }
 
     private void OnXMoveEnter(InputAction.CallbackContext ctx)
@@ -133,7 +150,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Debug.Log("Ragdoll waking up");
         isWakingUp = true;
-        yield return _waitForSeconds1;
+        yield return new WaitForSeconds(1f);
         isRagdolled = false;
         isWakingUp = false;
         JumpPressed = false;
