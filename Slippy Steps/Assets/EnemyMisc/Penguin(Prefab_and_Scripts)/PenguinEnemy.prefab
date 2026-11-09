@@ -202,3 +202,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 783bbcd0adca84ea4891b9cb42541d89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CrashCheck
+  knockbackForce: 2
+  isGrounded: 1
