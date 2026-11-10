@@ -1,0 +1,135 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3394333994304059707
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8056886221164979432}
+  - component: {fileID: 5759460091992244695}
+  - component: {fileID: 4618531351295511876}
+  - component: {fileID: 7135158926106049203}
+  - component: {fileID: 6059223458440436490}
+  - component: {fileID: 1560753540085325495}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8056886221164979432
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3394333994304059707}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5759460091992244695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3394333994304059707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a7a86c6ddee8e545b6d3089095ba7df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  timer: 450
+  timerText: {fileID: 0}
+  rubberbandController: {fileID: 0}
+  startPoint: {fileID: 0}
+  playerPrefab: {fileID: 7889471228741091793, guid: 71b1fa0fb187fa146af61b4718c2f2dd, type: 3}
+  inputActionAsset: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  pauseAction: {fileID: 140757552778408979, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  restartAction: {fileID: 696280351908553248, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  pauseActionRuntime:
+    m_Name: Pause Action Runtime
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 7505859f-7967-4ab0-b94e-579e5766aeb4
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+    m_Priority: 0
+  restartActionRuntime:
+    m_Name: Restart Action Runtime
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: a9eecd2d-696f-44a0-a5db-980741974129
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+    m_Priority: 0
+  startState: {fileID: 4618531351295511876}
+  pausedState: {fileID: 7135158926106049203}
+  playingState: {fileID: 6059223458440436490}
+  gameOverState: {fileID: 1560753540085325495}
+  currentState: {fileID: 0}
+--- !u!114 &4618531351295511876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3394333994304059707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c904ca206c41c6a4280a5b647a06921c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StartState
+  gameStateController: {fileID: 5759460091992244695}
+--- !u!114 &7135158926106049203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3394333994304059707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1089ffafaeaf8246bd84447bd15af2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PausedState
+  gameStateController: {fileID: 5759460091992244695}
+--- !u!114 &6059223458440436490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3394333994304059707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32529c3f6662526479b89853316314bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayingState
+  gameStateController: {fileID: 5759460091992244695}
+--- !u!114 &1560753540085325495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3394333994304059707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c1c63f3a795750499a17edfd964076d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameOverState
+  gameStateController: {fileID: 5759460091992244695}

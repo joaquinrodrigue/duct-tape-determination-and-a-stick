@@ -1,8 +1,9 @@
 using UnityEngine;
 using System;
 using TMPro;
-using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using UnityEngine.InputSystem;
+using System.Collections;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(StartState))]
@@ -11,16 +12,27 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(GameOverState))]
 public class GameStateController : MonoBehaviour
 {
-    [SerializeField] private GameState currentState;
     [SerializeField] private int timer;
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private RubberbandController rubberbandController;
     [SerializeField] private Transform startPoint;
     [SerializeField] private GameObject playerPrefab;
+    [SerializeField] private InputActionAsset inputActionAsset;
 
     private bool isPaused;
     private List<GameObject> players = new();
     private List<InputDevice> inputDevices = new();
+
+    public InputActionReference pauseAction;
+    public InputActionReference restartAction;
+    public InputAction pauseActionRuntime;
+    public InputAction restartActionRuntime;
+
+    public StartState startState;
+    public PausedState pausedState;
+    public PlayingState playingState;
+    public GameOverState gameOverState;
+    public GameState currentState;
 
     public void ChangeState(GameState newState)
     {
@@ -33,17 +45,23 @@ public class GameStateController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        ResetGame();
+        pauseActionRuntime = inputActionAsset.FindAction(pauseAction.action.name);
+        restartActionRuntime = inputActionAsset.FindAction(restartAction.action.name);
+        pauseActionRuntime.Enable();
+        restartActionRuntime.Enable();
+
+        startState = GetComponent<StartState>();
+        pausedState = GetComponent<PausedState>();
+        playingState = GetComponent<PlayingState>();
+        gameOverState = GetComponent<GameOverState>();
+        ChangeState(startState);
     }
 
     private void UpdateTimer()
     {
-        if(!isPaused)
-        {
-            String time = string.Format("{0:D2}:{1:D2}", timer / 60, timer % 60);
-            timerText.text = time;
-            timer--;
-        }
+        string time = string.Format("{0:D2}:{1:D2}", timer / 60, timer % 60);
+        timerText.text = time;
+        timer--;
     }
 
     public void PauseGame()
@@ -60,23 +78,15 @@ public class GameStateController : MonoBehaviour
 
     public void ResetGame()
     {
-        ResetState();
         ResetTimer();
         ResetInputDevices();
-        ResetPlayers();
-    }
-
-    private void ResetState()
-    {
-        currentState = new StartState { gameStateController = this };
-        currentState.Enter();
+        StartCoroutine(ResetPlayers());
     }
     
     private void ResetTimer()
     {
         CancelInvoke(nameof(UpdateTimer));
         timer = 450;
-        InvokeRepeating(nameof(UpdateTimer), 1f, 1f);
     }
 
     private void ResetInputDevices()
@@ -91,13 +101,16 @@ public class GameStateController : MonoBehaviour
         }
     }
 
-    private void ResetPlayers()
+    private IEnumerator ResetPlayers()
     {
         foreach (var player in players)
         {
             Destroy(player);
         }
         players.Clear();
+
+        yield return new WaitUntil(() => players.Count == 0);
+
         rubberbandController.transform.position = startPoint.position;
         for (int i = 0; i < inputDevices.Count; i++)
         {
