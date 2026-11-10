@@ -14,7 +14,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private bool isWakingUp = false;
 
     [Header("Input Actions")]
-    [SerializeField] private InputActionAsset inputActions;
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private InputActionReference xAxisAction;
     [SerializeField] private InputActionReference yAxisAction;
@@ -76,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnXMoveEnter(InputAction.CallbackContext ctx)
     {
-        if (isRagdolled) return;
+        if(isRagdolled) return;
         moveInput.x = ctx.ReadValue<float>();
     }
 
@@ -87,7 +86,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnYMoveEnter(InputAction.CallbackContext ctx)
     {
-        if (isRagdolled) return;
         moveInput.y = ctx.ReadValue<float>();
     }
 
@@ -113,6 +111,7 @@ public class PlayerMovement : MonoBehaviour
 
         if(isRagdolled && GroundCheck() && !isWakingUp)
         {
+            Debug.Log("Ragdoll detected and grounded, starting wakeup sequence");
             StartCoroutine(RagdollWakeup());
         }
 
@@ -143,7 +142,7 @@ public class PlayerMovement : MonoBehaviour
     public bool GroundCheck()
     {
         Debug.DrawRay(transform.position + Vector3.down, Vector3.down * 0.01f, Color.red, .016f);
-        return Physics.SphereCast(transform.position + Vector3.down * 1.5f, 0.1f, Vector3.down, out _, 0.05f, groundLayer);
+        return Physics.SphereCast(transform.position + Vector3.down, 0.1f, Vector3.down, out _, 0.05f, groundLayer);
     }
 
     private IEnumerator RagdollWakeup()

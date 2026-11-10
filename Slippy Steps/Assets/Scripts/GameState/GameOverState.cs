@@ -10,7 +10,15 @@ public class GameOverState : GameState
 
     public override void Act()
     {
-        Debug.Log("Acting in Game Over State");
+        
+    }
+
+    public override void CheckTransitions()
+    {
+        if (gameStateController.restartActionRuntime.triggered)
+        {
+            gameStateController.ChangeState(gameStateController.startState);
+        }
     }
 
     public override void Exit()

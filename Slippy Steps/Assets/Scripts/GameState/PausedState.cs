@@ -10,7 +10,14 @@ public class PausedState : GameState
 
     public override void Act()
     {
-        
+    }
+
+    public override void CheckTransitions()
+    {
+        if (gameStateController.pauseActionRuntime.triggered)
+        {
+            gameStateController.ChangeState(gameStateController.playingState);
+        }
     }
 
     public override void Exit()

@@ -5,16 +5,20 @@ public class StartState : GameState
 {
     public override void Enter()
     {
-        Debug.Log("Entering Start State");
+        gameStateController.ResetGame();
     }
 
     public override void Act()
     {
-        Debug.Log("Acting in Start State");
+        
+    }
+
+    public override void CheckTransitions()
+    {
+        gameStateController.ChangeState(gameStateController.playingState);
     }
 
     public override void Exit()
     {
-        Debug.Log("Exiting Start State");
     }
 }
