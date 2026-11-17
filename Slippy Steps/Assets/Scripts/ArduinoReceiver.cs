@@ -7,10 +7,10 @@ using System.IO.Ports;
 /// </summary>
 public class ArduinoReceiver 
 {
-    private bool debugEnabled = false;
-    private int center = 512;
-    private short mult = 64;
-    private SerialPort port = new("COM3", 19200);
+    private readonly bool debugEnabled = false;
+    private readonly int center = 512;
+    private readonly short mult = 64;
+    private readonly SerialPort port;
 
     public short XMovement { get; private set; }
     public short YMovement { get; private set; }
@@ -19,6 +19,7 @@ public class ArduinoReceiver
     // Start is called before the first frame update
     public ArduinoReceiver()
     {
+        port = new("COM3", 19200);
         port.Open();
         port.ReadTimeout = 10;
     }
