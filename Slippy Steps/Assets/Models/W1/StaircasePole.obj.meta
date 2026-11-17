@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5f8bf700adb74b841b8388fc0d1412ce
+guid: 53f69e4268a4ece4c92387de43514fbd
 ModelImporter:
   serializedVersion: 24300
   internalIDToNameTable: []
@@ -60,7 +60,7 @@ ModelImporter:
     generateMeshLods: 0
     meshLodGenerationFlags: 0
     maximumMeshLod: -1
-    meshOptimizationFlags: -1
+    meshOptimizationFlags: 0
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001

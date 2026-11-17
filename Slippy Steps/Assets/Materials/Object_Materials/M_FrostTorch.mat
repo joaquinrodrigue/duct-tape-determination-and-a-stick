@@ -1,0 +1,98 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-3799097400991315201
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Editor::UnityEditor.Rendering.Universal.AssetVersion
+  version: 10
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: M_FrostTorch
+  m_Shader: {fileID: -6465566751694194690, guid: f32b7654c6823b64caed23ed14c8eb30, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 2
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses:
+  - MOTIONVECTORS
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _Base_Texture:
+        m_Texture: {fileID: 2800000, guid: a6789b029b9615d4e8db8a8b23de8495, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Emission_Texture:
+        m_Texture: {fileID: 2800000, guid: d1daeac643efe7d46b3a9847611f9f4a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Height_texture:
+        m_Texture: {fileID: 2800000, guid: 35fb3fa46d2a4094bb8800d63ccc5598, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Metallic_Texture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal_Texture:
+        m_Texture: {fileID: 2800000, guid: 4cedcf858a7c831428510ef9e39c744e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Roughness_Texture:
+        m_Texture: {fileID: 2800000, guid: 3840eaeb89be6f04cbca5735cf158e2c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Triplanar_a0bc3c44d20b46ef90986dc77cf38834_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 12151239109524242ad093487bcee915, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Triplanar_c646139d72dc418faa7f8ba988bf5643_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: a6da2c6b392363a489db6a61c9b4746b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Freeze_Amount: 0.404
+    - _Height_Strength: 0.1
+    - _Icicle_Length: 0.41
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    - _Use_Emission: 1
+    - _World_Tiling: 0.5
+    m_Colors:
+    - _Deep_Ice: {r: 0, g: 0.21582836, b: 1, a: 1}
+    - _Emission_Color: {r: 0, g: 5.9471703, b: 5.549076, a: 1}
+    - _Trapped_Ice_Color: {r: 0, g: 0.35413456, b: 0.5471698, a: 1}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
