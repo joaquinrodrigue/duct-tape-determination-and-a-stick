@@ -66,7 +66,16 @@ public class ArduinoControlDevice : InputDevice, IInputUpdateCallbackReceiver
     private static void InitializeInPlayer()
     {
 #if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
-        if (api == null) api = new ArduinoReceiver();
+        // todo: test
+        try
+        {
+            if (api == null) api = new ArduinoReceiver();
+        }
+        catch
+        {
+            // assume it failed, just leave
+            return;
+        }
 
         InputSystem.RegisterLayout<ArduinoControlDevice>(
             matches: new InputDeviceMatcher()
