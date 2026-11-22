@@ -46,14 +46,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Icicle_Length: 1.12
+    - _Icicle_Length: 1.62
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Refraction_Strength: -0.96
-    - _Rim_Power: 2.66
-    - _World_Tiling: 0.62
+    - _Refraction_Strength: 4.83
+    - _Rim_Power: 1.43
+    - _World_Tiling: -3.14
     m_Colors:
-    - _Deep_Ice: {r: 0.17295581, g: 0.6957995, b: 1, a: 1}
+    - _Deep_Ice: {r: 0, g: 0.4815204, b: 1, a: 1}
     - _Ribbing_Frequency: {r: 11.1, g: 8.2, b: 0, a: 0}
     - _Transmission_Color: {r: 0, g: 0.88760805, b: 1, a: 1}
     - _Trapped_Ice_Color: {r: 0.084905505, g: 0.67318046, b: 1, a: 1}

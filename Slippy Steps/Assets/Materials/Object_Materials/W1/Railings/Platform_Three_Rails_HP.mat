@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Incline_Rails_HP
+  m_Name: Platform_Three_Rails_HP
   m_Shader: {fileID: -6465566751694194690, guid: f32b7654c6823b64caed23ed14c8eb30, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -25,7 +25,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _Base_Texture:
-        m_Texture: {fileID: 2800000, guid: 511fd619d7df376408be53137a901fb2, type: 3}
+        m_Texture: {fileID: 2800000, guid: 12ccb5be9c4801b469297842d5264ad4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Emission_Texture:
@@ -33,19 +33,19 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Height_texture:
-        m_Texture: {fileID: 2800000, guid: 772551268c52d2546af42f192da8451e, type: 3}
+        m_Texture: {fileID: 2800000, guid: e357d45a547ac61489ae352836b718dc, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Metallic_Texture:
-        m_Texture: {fileID: 2800000, guid: 62cdbb4df8d4fe74bbd5b7ccdcc92ddc, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6ca5b59f8f0322c4f9eba6d923f1e88a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Normal_Texture:
-        m_Texture: {fileID: 2800000, guid: 4af6d72ff2baa574494785204fd12ffc, type: 3}
+        m_Texture: {fileID: 2800000, guid: 4266da54710b1464bb5c08f4f9bfc6c4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Roughness_Texture:
-        m_Texture: {fileID: 2800000, guid: a39d5165babb2444dba93490191bad2c, type: 3}
+        m_Texture: {fileID: 2800000, guid: 675aee09b99753f4292b741cb4bbe491, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Triplanar_a0bc3c44d20b46ef90986dc77cf38834_Texture_1_Texture2D:
@@ -70,7 +70,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Freeze_Amount: 0
+    - _Freeze_Amount: 0.298
     - _Height_Strength: 0.02
     - _Icicle_Length: 0.8
     - _QueueControl: 0
